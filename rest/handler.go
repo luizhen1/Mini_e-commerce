@@ -4,12 +4,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"gorm.io/gorm"
 	"log"
 	"net/http"
 	"strconv"
 	"teste-api-golang/configs"
 	"teste-api-golang/models"
+
+	"gorm.io/gorm"
 )
 
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
@@ -124,7 +125,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 
 	users := make([]models.User, 0)
 
-	if err = db.Find(users).Error; err != nil {
+	if err = db.Find(&users).Error; err != nil {
 		log.Println(err.Error())
 		return
 	}
@@ -257,7 +258,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err = db.Delete(&models.User{}, "users_id = ?", userID).Error; err != nil {
+	if err = db.Delete(&models.User{}, "user_id = ?", userID).Error; err != nil {
 		fmt.Println(err.Error())
 		return
 	}

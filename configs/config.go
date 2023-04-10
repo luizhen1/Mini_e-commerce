@@ -14,7 +14,9 @@ var (
 )
 
 func Connect() (*gorm.DB, error) {
-	database, err := gorm.Open(mysql.Open("root:@tcp(localhost:3306)/alltech"), &gorm.Config{})
+	database, err := gorm.Open(mysql.Open("root:@tcp(localhost:3306)/alltech"), &gorm.Config{
+		AllowGlobalUpdate: true,
+	})
 
 	if err != nil {
 		log.Fatal(err)
